@@ -21,17 +21,12 @@ const App = () => {
 
   const [filtered, setFiltered] = useState("");
 
-  const handleInpute = (e) => {
-    const value = e.target.value.trim().toLowerCase();
-    setFiltered(value);
-    setStartData(
-      startData.filter((item) => item.name.toLowerCase().includes(filtered))
+  const handleInpute = () => {
+    return startData.filter((item) =>
+      item.name.toLowerCase().includes(filtered.trim().toLowerCase())
     );
-    if (!value) {
-      setStartData(data);
-    }
   };
-
+  const newData = handleInpute();
   const handleSubmit = (values, actions) => {
     actions.resetForm();
     const formValues = { ...values, id: nanoid() };
@@ -47,8 +42,8 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
       <ContactForm handleSubmit={handleSubmit} />
-      <SearchBox handleInpute={handleInpute} />
-      <ContactList contacts={startData} handleDelete={handleDelete} />
+      <SearchBox setFiltered={setFiltered} />
+      <ContactList contacts={newData} handleDelete={handleDelete} />
     </div>
   );
 };

@@ -1,10 +1,14 @@
 import c from "./SearchBox.module.css";
 
-const SearchBox = ({ handleInpute }) => {
+const SearchBox = ({ setFiltered }) => {
   return (
     <div>
       <p>Find contacts by name</p>
-      <input type="text" onChange={handleInpute} className={c.input} />
+      <input
+        type="text"
+        onChange={(e) => setFiltered(e.target.value)}
+        className={c.input}
+      />
     </div>
   );
 };
